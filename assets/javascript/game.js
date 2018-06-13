@@ -39,12 +39,16 @@ function resetGame () {
 // This will run whenever the user presses a key 
 document.onkeyup = function(event) {
 
+     // Users Guess
+     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    
+if (guessesLeft > 0 && gameChoices.indexOf(userGuess) > -1){
+
+
     // Updates guesses left
     guessesLeft--
     updateGuessesLeft()
 
-    // Users Guess
-    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
     // Puts user guess into the guessesSoFar array
     guessesSoFar.push(userGuess);
@@ -57,7 +61,7 @@ document.onkeyup = function(event) {
         // This is supposed to limit the user key input to only options in the gameChoices array
         // but it is not working properly
 
-        if (guessesLeft > 0 && userGuess.indexOf(gameChoices) > -1){
+        
 
             if(userGuess === computerGuess){
                 wins++;
