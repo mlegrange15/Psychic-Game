@@ -1,7 +1,7 @@
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
-var guessesSoFar = [];
+var guessesSoFar = [ ];
 
 var gameChoices = ["a", "b", "c","d", "e", "f","g", "h", "i","j", "k", "l",
                     "m", "n", "o","p", "q", "r","s", "t", "u","v", "w", "x","y", "z"];
@@ -31,7 +31,7 @@ document.querySelector("#guesses-so-far").innerHTML = guessesSoFar;
 // Supposed to reset the game but not working
 function resetGame () {
     guessesLeft = 9;
-    guessesSoFar = [];
+    guessesSoFar = [ ];
     updateGuessesLeft();
     updateGuessesSoFar();
 }
@@ -44,7 +44,7 @@ document.onkeyup = function(event) {
     updateGuessesLeft()
 
     // Users Guess
-    var userGuess = event.key;
+    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
     // Puts user guess into the guessesSoFar array
     guessesSoFar.push(userGuess);
@@ -54,9 +54,10 @@ document.onkeyup = function(event) {
     // Random Computers Guess
     var computerGuess = gameChoices[Math.floor(Math.random() * gameChoices.length)];
 
-    // if((userGuess === "a") || (userGuess === "b") || (userGuess === "c")){
-        
-        if(guessesLeft > 0){
+        // This is supposed to limit the user key input to only options in the gameChoices array
+        // but it is not working properly
+
+        if (guessesLeft > 0 && userGuess.indexOf(gameChoices) > -1){
 
             if(userGuess === computerGuess){
                 wins++;
@@ -71,5 +72,4 @@ document.onkeyup = function(event) {
                 resetGame(); 
             
             }
-    // }
 };
